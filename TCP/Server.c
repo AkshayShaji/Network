@@ -1,4 +1,5 @@
 #include <sys/socket.h>
+#include <arpa/inet.h>
 #include <netinet/in.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,7 +34,7 @@ int main()
     return 1;
   }
   len=sizeof(client);
-  temp_sock_desc=bind(sock_desc,(struct sockaddr*)&client,len);
+  temp_sock_desc=accept(sock_desc,(struct sockaddr*)&client,len);
   if(k==-1)
   {
     printf("Error in creating temporary socket\n");
@@ -46,6 +47,8 @@ int main()
     return 1;
   }
   printf("Message received from client is %s\n",buf);
+  close(temp_sock_desc);
+  close(sock_desc);
   return 0;
 }
   
