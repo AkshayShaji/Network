@@ -1,4 +1,5 @@
 #include <sys/socket.h>
+#include <arpa/inet.h>
 #include <netinet/in.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,7 +15,7 @@ int main()
   if(sock_desc==-1)
   {
     printf("Error in creating socket\n");
-    return 1;
+    return -1;
   }
   client.sin_family=AF_INET;
   client.sin_addr.s_addr=INADDR_ANY;
@@ -23,15 +24,15 @@ int main()
   if(k==-1)
   {
     printf("Error in creating connection\n");
-    return 1;
+    return -1;
   }
   printf("Enter the message to be send: ");
   fgets(buf,sizeof(buf),stdin);
-  k=send(sock_desc,buf,strlen(buf)+1,0);
+  k=send(sock_desc,buf,100,0);
   if(k==-1)
   {
     printf("Error in sending message to server\n");
-    return 1;
+    return -1;
   }
   return 0;
 }
