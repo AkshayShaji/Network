@@ -34,7 +34,7 @@ int main()
     return -1;
   }
   len=sizeof(client);
-  temp_sock_desc=accept(sock_desc,(struct sockaddr*)&client,len);
+  temp_sock_desc=accept(sock_desc,(struct sockaddr*)&client,&len);
   if(k==-1)
   {
     printf("Error in creating temporary socket\n");
